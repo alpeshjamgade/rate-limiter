@@ -1,10 +1,9 @@
 const config = require("config");
 const algorithm = config.get('ALGORITHM');
-const validAlgorithms = ["fixed-window", "leaking-bucket", "sliding-window-counter", "sliding-window-log"];
+const validAlgorithms = ["fixed-window", "leaking-bucket", "sliding-window-counter", "sliding-window-log", "token-bucket"];
 const RateLimiterAlgo = require(`./algorithms/${algorithm}`);
 
 setupRateLimiter = () => {
-
     if (validAlgorithms.includes(algorithm.toString())) {
         console.log(`[*] Selected : ${algorithm}`);
 
@@ -24,7 +23,7 @@ middleware = (req, res, next) => {
         })
         .catch(error => {
             console.error(`Check-in failed: ${error}`);
-            res.status(429).send();
+            res.status(429).send("Too many requests!");
         });
 }
 
