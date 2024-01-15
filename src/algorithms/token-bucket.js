@@ -1,19 +1,20 @@
-const ds = require("data-structures");
-let tokens;
+const config = require("config");
+var tokens = config.get("LIMIT");
+const resetInMs = config.get("RESET_TOKEN_BUCKET_IN_MS");
 
 const init = () => {
-    console.log("[*] Filling bucket ...");
-    tokens = new ds.Queue([...Array(10).keys()]);
+    console.log("[*] Resetting tokens ...");
+    tokens = config.get("LIMIT");
 
-    setInterval(init, 10000);
+    setInterval(init, resetInMs);
 }
 
 const checkIn = () => {
     return new Promise((resolve, reject) => {
-        if (!tokens.size) {
+        if (!tokens) {
             reject("No tokens available!");
         } else {
-            resolve(tokens.dequeue());
+            resolve(tokens--);
         }
     });
 };
