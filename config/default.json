@@ -1,4 +1,4 @@
 {
   "WEB_PORT": 4000,
-  ALGORITHM: "tokee sn-bucket"
+  "ALGORITHM": "token-bucket"
 }

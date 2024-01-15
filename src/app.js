@@ -5,10 +5,16 @@ const app = express();
 const webPort = config.get("WEB_PORT");
 const AppRouter = require("./router")
 const morgan = require("morgan");
+const {setupRateLimiter, middleware} = require("./rateLimiter");
 
 
 const publicDir = path.join(__dirname, "../public")
 
+
+
+setupRateLimiter();
+
+app.use(middleware);
 app.use(morgan("tiny"));
 app.use(express.static(publicDir));
 app.use("/api/", AppRouter);
