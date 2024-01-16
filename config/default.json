@@ -1,6 +1,6 @@
 {
   "WEB_PORT": 4000,
   "ALGORITHM": "token-bucket",
-  "LIMIT": 10,
-  "RESET_TOKEN_BUCKET_IN_MS": 5000
+  "LIMIT": 20,
+  "RESET_TOKEN_BUCKET_IN_MS": 10000
 }
